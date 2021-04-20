@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from "axios"
+import { useEffect, useState } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 
-function App() {
+import MovieDetails from "./pages/movie-details";
+import PopularMovies from "./pages/popular-movies";
+
+const App = () => {
+
+  const [movieData, setMovieData] = useState()
+
+  useEffect(() => {
+    const getMovieData = async () => {
+      const { data: { results } } = await axios({
+        method: 'get',
+        url: `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_API_KEY}`,
+      })
+      setMovieData(results);
+    }
+    getMovieData()
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <PopularMovies movieData={movieData} />
+        </Route>
+        {movieData?.map(({ id, overview, poster_path, release_date, title, vote_average }, index) => (
+          <Route key={index} exact path={`/movie/${id}`}>
+            <MovieDetails 
+              id={id}
+              overview={overview}
+              poster_path={poster_path}
+              release_date={release_date}
+              title={title}
+              vote_average={vote_average}
+            />
+          </Route>
+        ))}
+      </Switch>
+    </Router>
+  )
 }
 
 export default App;
