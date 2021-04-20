@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import Header from "../components/header";
+import Header from "../../components/header";
 
 const PopularMovies = ({ movieData }) => {
 
@@ -26,7 +26,7 @@ const MovieListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 67px;
+  margin-top: 66px;
 `
 
 const MovieLink = styled(Link)`

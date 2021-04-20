@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
-import Header from "../components/header";
-import InformationDetails from "../components/information-container";
-import TrailersList from "../components/trailers-list";
+import Header from "../../components/header";
+import InformationDetails from "../../components/information-container";
+import TrailersList from "../../components/trailers-list";
 
 const MovieDetails = () => {
 
@@ -62,7 +62,8 @@ const MovieDetails = () => {
 export default MovieDetails;
 
 const DetailContainer = styled.div`
-  margin-top: 67px;
+  margin-top: 66px;
+  font-family: 'Roboto', 'Helvetica Neue';
 `
 
 const TitleHeading = styled.h2`

@@ -26,7 +26,8 @@ const MobileHeaderContainer = styled.div`
   top: 0;
   margin: 0;
   width: 100%;
-  padding: 5px 20px;
+  padding: 5px 15px;
+  font-family: 'Roboto', 'Helvetica Neue';
 `
 
 const MobileHeader = styled.h1`
