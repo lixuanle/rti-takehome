@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const InformationDetails = ({ poster_path, title, release_date, runtime, vote_average }) => {
+
   return (
     <InformationContainer>
       <img src={`https://image.tmdb.org/t/p/w154${poster_path}`} alt={`${title} poster`} width={120}/>

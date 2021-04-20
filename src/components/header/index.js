@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { ReactComponent as Icon } from "../../assets/icon-left-arrow.svg";
 
 const Header = ({ headerTitle }) => {
+  
   return (
     <MobileHeaderContainer>
       {headerTitle === "Movie Details" ? 
