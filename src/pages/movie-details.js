@@ -1,14 +1,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import Header from "../components/header";
 import InformationDetails from "../components/information-container";
 import TrailersList from "../components/trailers-list";
 
-const MovieDetails = ({ id, overview, poster_path, release_date, title, vote_average }) => {
-  const [additionalDetails, setAdditionalDetails] = useState({})
-  const [movieTrailers, setMovieTrailers] = useState({});
+const MovieDetails = () => {
+
+  const { id } = useParams();
+
+  const [additionalDetails, setAdditionalDetails] = useState()
+  const [movieTrailers, setMovieTrailers] = useState();
 
   useEffect(() => {
     const getAdditionalDetails = async () => {
@@ -29,27 +33,30 @@ const MovieDetails = ({ id, overview, poster_path, release_date, title, vote_ave
     getMovieTrailers();
   }, [id])
 
-  return (
-    <>
-      <Header headerTitle="Movie Details" />
-      <DetailContainer>
-        <TitleHeading>
-          {title}
-        </TitleHeading>
-        <div style={{ padding: "25px" }}>
-          <InformationDetails
-            poster_path={poster_path}
-            release_date={release_date}
-            runtime={additionalDetails?.runtime} 
-            title={title}
-            vote_average={vote_average}
-          />
-          <OverviewText>{overview}</OverviewText>
-          <TrailersList movieTrailers={movieTrailers}/>
-        </div>
-      </DetailContainer>
-    </>
-  )
+  if (additionalDetails && movieTrailers) {
+    const { overview, poster_path, release_date, runtime, title, vote_average } = additionalDetails;
+    return (
+      <>
+        <Header headerTitle="Movie Details" />
+        <DetailContainer>
+          <TitleHeading>
+            {title}
+          </TitleHeading>
+          <div style={{ padding: "25px" }}>
+            <InformationDetails
+              poster_path={poster_path}
+              release_date={release_date}
+              runtime={runtime} 
+              title={title}
+              vote_average={vote_average}
+            />
+            <OverviewText>{overview}</OverviewText>
+            <TrailersList movieTrailers={movieTrailers}/>
+          </div>
+        </DetailContainer>
+      </>
+    )
+  } return null
 }
 
 export default MovieDetails;

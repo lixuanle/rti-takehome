@@ -30,16 +30,9 @@ const App = () => {
         <Route exact path="/">
           <PopularMovies movieData={movieData} />
         </Route>
-        {movieData?.map(({ id, overview, poster_path, release_date, title, vote_average }, index) => (
-          <Route key={index} exact path={`/movie/${id}`}>
-            <MovieDetails 
-              id={id}
-              overview={overview}
-              poster_path={poster_path}
-              release_date={release_date}
-              title={title}
-              vote_average={vote_average}
-            />
+        {movieData?.map(index => (
+          <Route key={index} exact path={`/movie/:id`}>
+            <MovieDetails />
           </Route>
         ))}
       </Switch>
