@@ -30,11 +30,9 @@ const App = () => {
         <Route exact path="/">
           <PopularMovies movieData={movieData} />
         </Route>
-        {movieData?.map(index => (
-          <Route key={index} exact path={`/movie/:id`}>
-            <MovieDetails />
-          </Route>
-        ))}
+        <Route exact path={`/movie/:id`}>
+          <MovieDetails />
+        </Route>
       </Switch>
     </Router>
   )
